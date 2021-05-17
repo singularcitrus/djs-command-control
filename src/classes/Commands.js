@@ -41,10 +41,27 @@ module.exports = class Commands {
 	 * }options Creation options
 	 */
 	constructor(client, path, options) {
-		const { prefix, prefixOnMention, customizablePrefix, defaultCategory, help, rateLimiter } = options;
-		const { include, category } = help;
-		const { enabled, amount, interval } = rateLimiter;
-		const { callback, options: prefixOptions } = customizablePrefix;
+		const {
+			prefix = null,
+			prefixOnMention = null,
+			customizablePrefix = null,
+			defaultCategory = null,
+			help = null,
+			rateLimiter = null
+		} = options;
+		const {
+			include = null,
+			category = null
+		} = help;
+		const {
+			enabled = null,
+			amount = null,
+			interval = null
+		} = rateLimiter;
+		const {
+			callback = null,
+			options: prefixOptions = null
+		} = customizablePrefix;
 
 		this.client = client;
 		this.prefix = prefix;
