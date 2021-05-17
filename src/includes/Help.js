@@ -1,6 +1,3 @@
-// Relative Requires
-const FilterCommands = require.main.require("./helper/FilterCommands");
-
 module.exports = {
 	name: "Help",
 
@@ -15,7 +12,7 @@ module.exports = {
 		const args = message.content.split(" ");
 
 		// Start by filtering commands by user permission level and whether they should be omitted from help
-		let viableCommands = (await FilterCommands.byPermission(commands, message)).filter((command) => !command.omitHelp);
+		let viableCommands = (await message.client.djsCommandControl.FilterCommands.byPermission(commands, message)).filter((command) => !command.omitHelp);
 
 		// Divide command into their respective categories
 		const categories = {};
