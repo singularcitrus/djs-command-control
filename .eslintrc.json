@@ -1,4 +1,4 @@
-module.exports = {
+{
 	"env": {
 		"browser": true,
 		"commonjs": true,
@@ -32,10 +32,9 @@ module.exports = {
 		"object-curly-spacing": [
 			"warn",
 			"always"
-		],
+		]
 	},
 	"globals": {
-		"__dirname": true,
-		"process": true,
-	},
-};
+		"process": true
+	}
+}
