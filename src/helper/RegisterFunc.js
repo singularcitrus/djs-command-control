@@ -1,9 +1,7 @@
-// NPM Modules
-const { MessageEmbed } = require("discord.js-light");
+import { MessageEmbed } from "discord.js-light";
+import FilterCommands from "./FilterCommands";
 
-const FilterCommands = require("../helper/FilterCommands");
-
-module.exports = (client) => {
+export default (client) => {
 	client.djsCommandControl =
 		{
 			getEmbed: () => (new MessageEmbed)

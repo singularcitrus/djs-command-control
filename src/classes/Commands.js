@@ -1,8 +1,7 @@
-const fs = require("fs");
-const path = require("path");
-const { RateLimiter } = require("discord.js-rate-limiter");
-
-const RegisterFunc = require("../helper/RegisterFunc");
+import fs from "fs";
+import path from "path";
+import { RateLimiter } from "discord.js-rate-limiter";
+import RegisterFunc from "../helper/RegisterFunc";
 
 const defaultOptions = {
 	defaultCategory: {
@@ -11,7 +10,7 @@ const defaultOptions = {
 	}
 };
 
-module.exports = class Commands {
+export default class Commands {
 
 	/**
 	 * @param {Client} client The default discord.js client
@@ -177,7 +176,7 @@ module.exports = class Commands {
 			});
 		});
 	}
-};
+}
 
 /**
  * Recursively load all files in directories and subdirectories

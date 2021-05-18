@@ -1,1 +1,3 @@
-module.exports = require("./classes/Commands");
+import Commands from "./classes/Commands";
+
+export default Commands;
