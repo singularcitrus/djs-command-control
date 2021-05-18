@@ -20,7 +20,7 @@ export default class Commands {
 	 * 		prefix: string,
 	 * 		prefixOnMention?: boolean,
 	 * 		customizablePrefix?: {
-	 * 		    callback: function,
+	 * 		    callback: function(message, options),
 	 * 		    options: {}
 	 * 		},
 	 *  	defaultCategory?: {
@@ -139,7 +139,7 @@ export default class Commands {
 		let usePrefix = this.prefix;
 
 		if (this.customizablePrefix) {
-			const functionReturn = this.customizablePrefix.callback(this.customizablePrefix.options);
+			const functionReturn = this.customizablePrefix.callback(message, this.customizablePrefix.options);
 			usePrefix = functionReturn ? functionReturn : this.prefix;
 		}
 
