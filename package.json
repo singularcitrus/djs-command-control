@@ -1,6 +1,6 @@
 {
   "name": "djs-command-control",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -35,7 +35,7 @@
     "presets": [
       "es2015"
     ],
-    "plugins":  [
+    "plugins": [
       "add-module-exports"
     ]
   }
