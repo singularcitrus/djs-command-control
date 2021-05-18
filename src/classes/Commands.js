@@ -221,7 +221,7 @@ function loadCommands(loadPath) {
 	const commands = [];
 
 	// Read all files in commands folder
-	let foundFiles = getAllFiles(`${loadPath}/../${loadPath}`, []);
+	let foundFiles = getAllFiles(`${process.cwd()}/${loadPath}`, []);
 	// Filter only javascript files in commands folder
 	foundFiles.filter((file) => file.endsWith(".js"));
 
