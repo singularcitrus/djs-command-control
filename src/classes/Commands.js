@@ -41,81 +41,76 @@ export default class Commands {
 	 * }options Creation options
 	 */
 	constructor(client, path, options) {
-		const {
-			prefix = null,
-			prefixOnMention = null,
-			customizablePrefix = null,
-			defaultCategory = null,
-			help = null,
-			rateLimiter = null
-		} = options;
-		const {
-			include = null,
-			category = null
-		} = help;
-		const {
-			enabled = null,
-			amount = null,
-			interval = null
-		} = rateLimiter;
-		const {
-			callback = null,
-			options: prefixOptions = null
-		} = customizablePrefix;
+		const { prefix, prefixOnMention, customizablePrefix, defaultCategory, help, rateLimiter } = options;
 
 		this.client = client;
 		this.prefix = prefix;
 		this.prefixOnMention = !!prefixOnMention;
-		this.customizablePrefix = {
-			callback: callback ? callback : () => {},
-			options: prefixOptions ? prefixOptions : {},
-		};
 
-		// Make a discord.js rateLimiter object if rateLimiter should be enabled
-		this.rateLimiter = enabled ? new RateLimiter(amount ? amount : 1, interval ? interval : 5000) : null;
+		if (customizablePrefix) {
+			const { callback, options: prefixOptions } = customizablePrefix;
+			this.customizablePrefix = {
+				callback: callback ? callback : () => {
+				},
+				options: prefixOptions ? prefixOptions : {},
+			};
+		}
+
+		if (rateLimiter) {
+			const { enabled, amount, interval } = rateLimiter;
+			// Make a discord.js rateLimiter object if rateLimiter should be enabled
+			this.rateLimiter = enabled ? new RateLimiter(amount ? amount : 1, interval ? interval : 5000) : null;
+		}
 
 		// Add functions into the client object
 		RegisterFunc(client);
 
 		// Calculate the default category
 		const defCategory = defaultCategory ? defaultCategory : defaultOptions.defaultCategory;
-		// Default category name if not specified
-		defCategory.name =
-			defaultCategory.name && typeof defaultCategory.name === "string"
-				? defaultCategory.name
-				: defaultOptions.defaultCategory.name;
-		// Default category title if not specified
-		defCategory.title =
-			defaultCategory.title && typeof defaultOptions.title === "string"
-				? defaultCategory.title
-				: defaultOptions.defaultCategory.title;
+
+		if (defaultCategory) {
+			// Default category name if not specified
+			defCategory.name =
+				defaultCategory.name && typeof defaultCategory.name === "string"
+					? defaultCategory.name
+					: defaultOptions.defaultCategory.name;
+			// Default category title if not specified
+			defCategory.title =
+				defaultCategory.title && typeof defaultOptions.title === "string"
+					? defaultCategory.title
+					: defaultOptions.defaultCategory.title;
+		}
+
 		// Set the the first category
 		this.categories = [defCategory];
 
 		// Load all commands in the commands array
 		this.commands = loadCommands(path);
 
-		// If we should include a help command
-		if (include) {
-			// Load the default help command
-			/**
-			 * @type{
-			 *     {
-			 *       name: string,
-			 *       invoke: []string,
-			 *       description: string,
-			 *       usage: string,
-			 *       execute: function():Promise<void>,
-			 *       category: string,
-			 *       permissions: []string,
-			 *     }
-			 * }
-			 */
-			const helpCommand = require("../includes/Help");
-			// Set help commands default category
-			helpCommand.category = category ? category : defaultCategory.name;
-			// Add the help command to the list
-			this.commands.push(helpCommand);
+		if (help) {
+			const { include, category } = help;
+			// If we should include a help command
+			if (include) {
+				// Load the default help command
+				/**
+				 * @type{
+				 *     {
+				 *       name: string,
+				 *       invoke: []string,
+				 *       description: string,
+				 *       usage: string,
+				 *       execute: function():Promise<void>,
+				 *       category: string,
+				 *       permissions: []string,
+				 *     }
+				 * }
+				 */
+				const helpCommand = require("../includes/Help");
+				// Set help commands default category
+				helpCommand.category = category ? category : defaultCategory.name;
+				// Add the help command to the list
+				this.commands.push(helpCommand);
+			}
 		}
 	}
 
