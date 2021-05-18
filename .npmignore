@@ -1,2 +1,4 @@
 /src/
 .idea/
+.eslintrc.json
+.eslintignore
