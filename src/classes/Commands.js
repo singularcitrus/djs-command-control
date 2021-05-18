@@ -30,6 +30,7 @@ export default class Commands {
 	 *  	help?: {
 	 *  	 	include?: boolean,
 	 *			category?: string,
+	 *			omitFromHelp?: boolean,
 	 *  	},
 	 *  	rateLimiter?: {
 	 *  		enabled: boolean,
