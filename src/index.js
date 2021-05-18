@@ -1,3 +1,3 @@
-import Commands from "./classes/Commands";
+import CommandsClass from "./classes/Commands";
 
-export default Commands;
+export const Commands = CommandsClass;
