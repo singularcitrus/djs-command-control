@@ -5,9 +5,9 @@ export default {
 	 * @param { Message } message
 	 * @returns {Promise<*>}
 	 */
-	byPermission: async (commands, message) => {
+	byPermission: async (commands, message) =>
 		// Filter all commands based on the permissions specified and the user's permissions
-		return commands.filter((command) => {
+		commands.filter((command) => {
 			let viable = false;
 			if (command["permissions"].length > 0) {
 				command["permissions"].forEach((permission) => {
@@ -19,6 +19,6 @@ export default {
 				viable = true;
 			}
 			return viable;
-		});
-	}
+		})
+
 };
