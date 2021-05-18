@@ -167,6 +167,7 @@ export default class Commands {
 						{
 							prefix: usePrefix,
 							commands: this.commands,
+							commandCategories: this.categories,
 						});
 				}
 			});
