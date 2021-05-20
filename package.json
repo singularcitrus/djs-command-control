@@ -21,20 +21,10 @@
   },
   "homepage": "https://github.com/singularcitrus/djs-command-control#readme",
   "devDependencies": {
-    "@babel/cli": "^7.14.3",
-    "@babel/core": "^7.14.3",
-    "@babel/plugin-transform-classes": "^7.14.2",
-    "@babel/plugin-transform-modules-commonjs": "^7.14.0",
     "eslint": "^7.26.0"
   },
   "dependencies": {
     "discord.js-light": "^3.5.11",
     "discord.js-rate-limiter": "^1.0.7"
-  },
-  "babel": {
-    "plugins": [
-      "@babel/plugin-transform-modules-commonjs",
-      "@babel/plugin-transform-classes"
-    ]
   }
 }
