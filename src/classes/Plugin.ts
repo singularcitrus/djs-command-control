@@ -1,11 +1,13 @@
 import { CommandObj, DjsCommandControlClient } from "../types";
 import Command from "./Command";
+import Commands from "./Commands";
 
 export default class {
   readonly name: string;
   private _commands: CommandObj[] = [];
   private _initialize: (
-    djsCommandControl: DjsCommandControlClient | null
+    djsCommandControl: DjsCommandControlClient | null,
+    ctx: Commands
   ) => DjsCommandControlClient | false = (arg0 = null) => false;
 
   constructor(name: string) {
@@ -19,13 +21,15 @@ export default class {
    */
   set initialize(
     value: (
-      djsCommandControl: DjsCommandControlClient | null
+      djsCommandControl: DjsCommandControlClient | null,
+      ctx: Commands
     ) => DjsCommandControlClient | false
   ) {
     this._initialize = value;
   }
   get initialize(): (
-    djsCommandControl: DjsCommandControlClient | null
+    djsCommandControl: DjsCommandControlClient | null,
+    ctx: Commands
   ) => DjsCommandControlClient | false {
     return this._initialize;
   }

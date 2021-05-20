@@ -23,7 +23,7 @@ const defaultOptions = {
 };
 
 export default class {
-  client: ModifiedClient;
+  private readonly client: ModifiedClient;
   prefixOnMention: boolean;
   prefix: string;
   customizablePrefix: CustomizablePrefix | null = null;
@@ -147,7 +147,7 @@ export default class {
    * @return {Commands}
    */
   addPlugin(plugin: Plugin) {
-    const djs = plugin.initialize(this.client.djsCommandControl);
+    const djs = plugin.initialize(this.client.djsCommandControl, this);
     if (djs) {
       this.client.djsCommandControl = djs;
       this._plugins.push(plugin.name);
