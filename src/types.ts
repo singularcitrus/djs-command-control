@@ -1,5 +1,4 @@
-import { Client } from "discord.js-light";
-import FilterCommands from "./helper/FilterCommands";
+import { Client, Message } from "discord.js-light";
 
 export interface CommandOptions {
   prefix: string;
@@ -44,8 +43,16 @@ export interface CommandObj {
 }
 
 export interface ModifiedClient extends Client {
-  djsCommandControl: {
-    getEmbed: Function;
-    FilterCommands: typeof FilterCommands;
-  };
+  djsCommandControl: DjsCommandControlClient;
+}
+
+export interface DjsCommandControlClient {
+  getEmbed: Function;
+  FilterCommands: FilterCommands;
+  [key: string]: any;
+}
+
+interface FilterCommands {
+  byPermission: (commands: CommandObj[], message: Message) => Promise<any>;
+  [key: string]: any;
 }

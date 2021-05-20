@@ -13,6 +13,7 @@ import {
 } from "../types";
 import Command from "./Command";
 import Help from "../includes/Help";
+import Plugin from "./Plugin";
 
 const defaultOptions = {
   defaultCategory: {
@@ -22,13 +23,15 @@ const defaultOptions = {
 };
 
 export default class {
-  client: Client;
+  client: ModifiedClient;
   prefixOnMention: boolean;
   prefix: string;
   customizablePrefix: CustomizablePrefix | null = null;
   rateLimiter: RateLimiter | null = null;
   categories: Category[];
   commands: CommandObj[];
+
+  private _plugins: string[] = []; // List of activated plugins
 
   /**
    * @param {Client} client The default discord.js client
@@ -54,7 +57,7 @@ export default class {
       rateLimiter,
     } = options;
 
-    this.client = client;
+    this.client = client as ModifiedClient;
     this.prefix = prefix;
     this.prefixOnMention = prefixOnMention;
 
@@ -75,7 +78,7 @@ export default class {
     }
 
     // Add functions into the client object
-    RegisterFunc(client as ModifiedClient);
+    RegisterFunc(this.client);
 
     // Calculate the default category
     const defCategory: Category = defaultCategory
@@ -134,6 +137,22 @@ export default class {
    */
   addCategory(name: string, title: string) {
     this.categories.push({ name, title });
+    return this;
+  }
+
+  /**
+   * Registers a plugin
+   *
+   * @param {Plugin} plugin The plugin to register
+   * @return {Commands}
+   */
+  addPlugin(plugin: Plugin) {
+    const djs = plugin.initialize(this.client.djsCommandControl);
+    if (djs) {
+      this.client.djsCommandControl = djs;
+      this._plugins.push(plugin.name);
+      this.commands.push(...plugin.commands);
+    }
     return this;
   }
 
