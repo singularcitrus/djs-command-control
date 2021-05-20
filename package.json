@@ -40,5 +40,13 @@
     "lib",
     "LICENSE.md",
     "README.md"
+  ],
+  "keywords": [
+    "discord",
+    "commands",
+    "discord-bot",
+    "bot",
+    "discordapp",
+    "discord.js"
   ]
 }
