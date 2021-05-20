@@ -5,7 +5,7 @@ import RegisterFunc from "../helper/RegisterFunc";
 import { Client, Message } from "discord.js-light";
 import {
   Category,
-  Command,
+  CommandObj,
   CommandOptions,
   CustomizablePrefix,
   ModifiedClient,
@@ -26,7 +26,7 @@ export default class Commands {
   customizablePrefix: CustomizablePrefix | null = null;
   rateLimiter: RateLimiter | null = null;
   categories: Category[];
-  commands: Command[];
+  commands: CommandObj[];
 
   /**
    * @param {Client} client The default discord.js client
@@ -181,7 +181,7 @@ export default class Commands {
       );
 
     // Check the message for every command's invoke
-    viableCommands.forEach((command: Command) => {
+    viableCommands.forEach((command: CommandObj) => {
       command.invoke.forEach((invoke) => {
         if (
           message.content.split(" ")[0] === `${usePrefix}${invoke}` ||
@@ -244,7 +244,7 @@ function loadCommands(loadPath: string) {
    *     }
    * ]}
    */
-  const commands: Command[] = [];
+  const commands: CommandObj[] = [];
 
   // Read all files in commands folder
   let foundFiles = getAllFiles(`${process.cwd()}/${loadPath}`, []);
@@ -253,7 +253,11 @@ function loadCommands(loadPath: string) {
 
   foundFiles.forEach((file) => {
     // Test if the command has the correct exports
-    const command = require(`${file}`);
+    let command: CommandObj | Command = require(`${file}`);
+
+    if (command instanceof Command) {
+      command = command.command;
+    }
 
     // If all this is true it is a valid commands
     if (command.name && command.invoke && command.execute) {

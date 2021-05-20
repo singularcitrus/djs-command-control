@@ -32,7 +32,7 @@ export interface RateLimiterOptions {
   interval?: number;
 }
 
-export interface Command {
+export interface CommandObj {
   name: string;
   invoke: string[];
   description: string;
