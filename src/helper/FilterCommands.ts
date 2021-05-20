@@ -1,4 +1,4 @@
-import { Command } from "../types";
+import { CommandObj } from "../types";
 import { Message } from "discord.js-light";
 
 export default {
@@ -8,7 +8,7 @@ export default {
    * @param { Message } message
    * @returns {Promise<*>}
    */
-  byPermission: async (commands: Command[], message: Message): Promise<any> =>
+  byPermission: async (commands: CommandObj[], message: Message): Promise<any> =>
     // Filter all commands based on the permissions specified and the user's permissions
     commands.filter((command) => {
       let viable = false;
