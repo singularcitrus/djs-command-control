@@ -1,5 +1,5 @@
 import { Message } from "discord.js-light";
-import { Category, Command, ModifiedClient } from "../types";
+import { Category, CommandObj, ModifiedClient } from "../types";
 
 export default {
   name: "Help",
@@ -24,12 +24,12 @@ export default {
         commands,
         message
       )
-    ).filter((command: Command) => !command.omitHelp);
+    ).filter((command: CommandObj) => !command.omitHelp);
 
     // Divide command into their respective categories
 
     const categories: any = {};
-    viableCommands.forEach((command: Command) => {
+    viableCommands.forEach((command: CommandObj) => {
       if (!categories[command.category]) categories[command.category] = [];
       categories[command.category].push(command);
     });
@@ -77,7 +77,7 @@ export default {
           );
 
         // Loop through the commands in the category and add them to the embed
-        categories[category].forEach((command: Command) => {
+        categories[category].forEach((command: CommandObj) => {
           // Start building the description
           let description = `${command.description}\n`;
           // Add the invokes and usages to the description
