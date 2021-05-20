@@ -11,6 +11,8 @@ import {
   ModifiedClient,
   RateLimiterOptions,
 } from "../types";
+import Command from "./Command";
+import Help from "../includes/Help";
 
 const defaultOptions = {
   defaultCategory: {
@@ -19,7 +21,7 @@ const defaultOptions = {
   },
 };
 
-export default class Commands {
+export default class {
   client: Client;
   prefixOnMention: boolean;
   prefix: string;
@@ -115,7 +117,7 @@ export default class Commands {
          *     }
          * }
          */
-        const helpCommand = require("../includes/Help");
+        const helpCommand = Help;
         // Set help commands default category
         helpCommand.category = category ? category : defCategory.name;
         // Add the help command to the list
