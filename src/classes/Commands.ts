@@ -156,6 +156,13 @@ export default class {
     return this;
   }
 
+  /**
+   * Get an array of all active plugins
+   */
+  get plugins(): string[] {
+    return this._plugins;
+  }
+
   async messageEvent(message: Message) {
     const client: ModifiedClient = message.client as ModifiedClient;
     if (!message.guild) return;
