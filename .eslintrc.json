@@ -1,40 +1,22 @@
 {
-	"env": {
-		"browser": true,
-		"es2021": true
-	},
-	"extends": "eslint:recommended",
-	"parserOptions": {
-		"ecmaVersion": 12,
-		"sourceType": "module"
-	},
-	"rules": {
-		"indent": [
-			"error",
-			"tab"
-		],
-		"quotes": [
-			"error",
-			"double"
-		],
-		"semi": [
-			"error",
-			"always"
-		],
-		"arrow-body-style": [
-			"error",
-			"as-needed"
-		],
-		"arrow-parens": [
-			"error",
-			"always"
-		],
-		"object-curly-spacing": [
-			"warn",
-			"always"
-		]
-	},
-	"globals": {
-		"process": true
-	}
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "env": {
+      "es6": true
+    },
+    "extends": [
+      "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "rules": {
+      "prettier/prettier": "warn",
+      "no-console": "warn",
+      "no-debugger": "warn"
+    }
 }
