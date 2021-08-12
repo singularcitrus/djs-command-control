@@ -1,9 +1,5 @@
-import CommandClass from "./classes/Command";
-import CommandsClass from "./classes/Commands";
-import PluginClass from "./classes/Plugin";
-
-export const Commands = CommandsClass;
-export const Command = CommandClass;
-export const Plugin = PluginClass;
+export * as Commands from "./classes/Commands";
+export * as Command from "./classes/Command";
+export * as Plugin from "./classes/Plugin"
 
 export * from "./types";
